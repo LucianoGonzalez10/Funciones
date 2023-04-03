@@ -1,26 +1,79 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "pila.h"
-Pila cargarPila ();
 
+Pila buscarMenor();
 int main()
 {
-    Pila a;
-    inicpila(&a);
-    a= cargarPila(a);
-    mostrar(&a);
+    Pila menor;
+    inicpila(&menor);
+    menor=buscarMenor(menor);
+    mostrar(&menor);
     return 0;
+
 }
 
 Pila cargarPila (){
 Pila a;
 inicpila(&a);
+
 char control = 's';
 while(control == 's'){
     leer(&a);
     printf("Quiere seguir? ");
     fflush(stdin);
     scanf("%c", &control);
+
+
 }
+
 return a;
+
 }
+
+Pila desapilaPila(){
+Pila desapilado;
+inicpila (&desapilado);
+Pila a;
+inicpila (&a);
+a = cargarPila(a);
+while(!pilavacia(&a)){
+    apilar(&desapilado , desapilar(&a));
+}
+
+return desapilado;
+}
+
+Pila pasarOrdenada (){
+Pila ordenada;
+inicpila(&ordenada);
+Pila a, desapilado;
+inicpila(&a);
+inicpila(&desapilado);
+desapilado = desapilaPila();
+while(!pilavacia(&desapilado)){
+    apilar(&ordenada, desapilar(&desapilado));
+}
+return ordenada;
+}
+
+Pila buscarMenor(){
+Pila menor, aux, a;
+inicpila(&menor);
+inicpila(&aux);
+inicpila(&a);
+a = cargarPila();
+apilar(&menor, desapilar(&a));
+while(!pilavacia(&a)){
+    if(tope(&menor) > tope(&a)){
+    apilar(&aux, desapilar(&menor));
+    apilar(&menor, desapilar(&a));
+    }
+    else{
+        apilar(&aux, desapilar(&a));
+    }
+
+}
+return menor;
+}
+
