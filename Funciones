@@ -2,13 +2,12 @@
 #include <stdlib.h>
 #include "pila.h"
 
-Pila buscarMenor();
+int sumarTope();
 int main()
 {
-    Pila menor;
-    inicpila(&menor);
-    menor=buscarMenor(menor);
-    mostrar(&menor);
+    int resultado;
+    resultado = sumarTope();
+    printf("%i " , resultado);
     return 0;
 
 }
@@ -72,8 +71,74 @@ while(!pilavacia(&a)){
     else{
         apilar(&aux, desapilar(&a));
     }
-
 }
 return menor;
 }
+
+Pila insertarElemento(){
+Pila a, elemento, aux;
+inicpila(&a);
+inicpila(&elemento);
+inicpila(&aux);
+a = cargarPila();
+leer(&elemento);
+while(!pilavacia(&elemento)){
+    if(tope(&elemento) < tope(&a)){
+        apilar(&aux, desapilar(&a));
+    }
+    else{
+        apilar(&a, desapilar(&elemento));
+    }
+}
+while(!pilavacia(&aux)){
+    apilar(&a, desapilar(&aux));
+}
+return a;
+}
+
+int sumarTope(){
+    Pila a;
+    inicpila(&a);
+    a = cargarPila();
+    int suma = desapilar(&a), resultado = 0;
+    resultado = suma+tope(&a);
+
+
+return resultado;
+}
+
+int sumarPila(){
+    int suma = 0;
+    Pila a;
+    inicpila(&a);
+    a = cargarPila();
+while(!pilavacia(&a)){
+    suma = suma + desapilar(&a);
+}
+return suma;
+}
+
+int cantidadPila(){
+    int cantidad;
+    cantidad = 0;
+    Pila a;
+    inicpila(&a);
+    a = cargarPila();
+    while(!pilavacia(&a)){
+        cantidad++;
+        desapilar(&a);
+    }
+    return cantidad;
+}
+float dividirPila(){
+ int suma, cantidad , division;
+    suma = sumarPila();
+    cantidad = cantidadPila();
+    
+    division = suma / cantidad;
+    
+
+return division;
+}
+
 
