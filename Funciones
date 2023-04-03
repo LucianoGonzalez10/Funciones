@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+Pila cargarPila ();
+
+int main()
+{
+    Pila a;
+    inicpila(&a);
+    a= cargarPila(a);
+    mostrar(&a);
+    return 0;
+}
+
+Pila cargarPila (){
+Pila a;
+inicpila(&a);
+char control = 's';
+while(control == 's'){
+    leer(&a);
+    printf("Quiere seguir? ");
+    fflush(stdin);
+    scanf("%c", &control);
+}
+return a;
+}
